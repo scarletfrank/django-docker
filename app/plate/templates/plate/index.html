@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'plate/global.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'plate/sty1e.css' %}" />
+    <head>
+        <title>scarlet的主页 </title>
+        <meta charset="utf-8" name="viewport" 
+        content= "width=device-width, initial-scale=1.0"> 
+    </head>
+    <body>
+
+        <div class="header">
+            <a href="#default" class="logo">キラッ FrankScarlet</a>
+            <div class="header-right">
+              <a class="active" href="#home">Home</a>
+              <a href="/demo/">Demo</a>
+              <a href="/polls/">Polls</a>
+              <a href="/bizcard/">Otaku</a>
+            </div>
+          </div>
+          
+        <!-- <div class="header">
+            <h1>本站施工中 </h1>
+        </div> -->
+        <!-- <div class="topnav">
+            <a class="active" href="/">Home</a>
+            <a href="/demo/">Demo</a>
+            <a href="/polls/">Polls</a>
+            <a href="/bizcard/">Otaku</a>
+        </div> -->
+        <!-- The App Section -->
+        <div class="container">
+            <div class="row">
+            <div class="column-66">
+                <h1 class="xlarge-font"><b>The Space</b></h1>
+                <h1 class="large-font" style="color:MediumSeaGreen;"><b>其实就是博客</b></h1>
+                <p><span style="font-size:36px">博客内容比博客本身更重要</span> 
+                    是的，我就陷入了这样的怪圈...尤其是还一直拖着 
+                    关于编程，大学四年一开始写的是C++，后面写的最多的是Python，工作后写的最多是Java，GitHub里都有。
+                    平时的兴趣就是电子游戏和读书，关于各平台的账号可以单独做一个页面。
+                    其中草菇酸笋的页面单独列出来了。
+                </p>
+                <button class="button" onclick="location.href='https://github.com/FrankScarlet';">进入GitHub</button>
+            </div>
+            <div class="column-33">
+                <img src="/staticfiles/imgs/kaede-1.png" width="335" height="471">
+            </div>
+            </div>
+        </div>
+
+        <div id="app">
+            <h3>ToDo List</h3>
+            <ul>
+                <li>Blog</li>
+                <li>访问情况看版</li>
+                <li>Vue要素demo</li>
+            </ul>
+        </div>
+        <div class="footer-container">
+            <div id="text block">
+                <hr>
+                <p>
+                    GitHub: <a href="https://github.com/FrankScarlet">FrankScarlet</a>
+                    
+                    邮箱：<a href="mailto:hferfrank@gmail.com">hferfrank@gmail.com</a>
+                    
+                    友情链接：<a href = "https://gzlgfang.github.io/">gzlgfang</a>
+                </p>
+                <p>
+                    FrankScarlet |
+                    个人主页 | 
+                    <a href="http://www.beian.miit.gov.cn"> 粤ICP备17130357号 </a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

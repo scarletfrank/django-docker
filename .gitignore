@@ -4,3 +4,5 @@
 env/
 app/django_tiger/__pycache__/
 
+.env.dev.db
+app/staticfiles/admin/

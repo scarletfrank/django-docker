@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'plate/global.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'plate/card.css' %}" />
+
+<head>
+    <title>芙兰人Pの名刺 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="bg"></div>
+    <div class="signature">
+        <img src="/static/imgs/kaede-sign-crop.png" alt="kaede-sign">
+    </div> 
+    <div class="bg-text">芙兰人</div>
+    <div class="console">
+        This page is maintained by Izumi.
+        <img src="/static/imgs/izumi-avatar.png" width="30">
+        ====>
+        <button id="btn-bg">水印开关</button>
+    </div>
+    <div class="contact">
+        Contact: 
+        <a href="https://weibo.com/u/5037992775">
+            [Weibo]
+        </a>
+        <a href="https://twitter.com/xx_frankscarlet">
+            [Twitter]
+        </a>
+        <li>
+            デレステ: 
+            <input type="text" value="771349565" id="dereId">
+            <button onclick="cpId()">ID复制</button>
+        </li>
+    </div> 
+</body>
+
+<script>
+    const btn = document.getElementById("btn-bg");
+    btn.addEventListener("click", removeT)
+    function removeT(){
+        let x = document.querySelector(".bg-text");
+        if (x.style.display === "none") {
+            x.style.animationDelay = "0s";
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function cpId(){
+        let x = document.querySelector("#dereId");
+        x.select();
+        x.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("copied the text: " + x.value);
+    }
+    // window.onscroll = function(){
+
+    //     //变量scrollTop是滚动条滚动时，距离顶部的距离
+    //     var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+    //     //变量windowHeight是可视区的高度
+    //     var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    //     //变量scrollHeight是滚动条的总高度
+    //     var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
+    //         //滚动条到底部的条件
+    //     if(scrollTop+windowHeight==scrollHeight){
+    //         //let x = document.querySelector('.contact');
+    //         //x.style.display = "block";
+    //         console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
+    //     }   
+    // }
+</script>
+
+</html>
