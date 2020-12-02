@@ -1,0 +1,41 @@
+{% extends "plate/base.html" %}
+
+{% block title %}Demo合集{% endblock %}
+
+{% block content %}
+
+<h1>Demo区</h1>
+<h2>各种Demo</h2>
+<ul>
+    <li>
+        <a class="active" href="/demo/todo/">vue-try</a>
+    </li>
+    <li>
+        <a href="/demo/jsdemo/">Javascript Demo</a>
+    </li>
+    <li>
+        <a href="/demo/table/">DataTables View Demo</a>
+    </li>
+    <li>
+        <a href="/demo/echart/">Echart View Demo</a>
+    </li>
+    
+</ul>
+<div id="app">
+    <p>
+        [[ message ]]
+    </p>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: function () {
+            return {message: 'Hello Vue! 这个用的是最简单的渲染方法'}
+        }
+    })
+</script>
+
+{% endblock %}

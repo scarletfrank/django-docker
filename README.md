@@ -26,7 +26,7 @@
 
 ```shell
 docker-compose up -d --build
-docker-compose down -v
+docker-compose down
 # Bring down the development containers (and the associated volumes with the -v flag)
 # 可选命令
 # entrypoint.sh里其实应该有migrate了
@@ -46,14 +46,15 @@ docker volume inspect django-docker_postgres_data
 带了static和media
 
 ```shell
-$ docker-compose -f docker-compose.prod.yml up -d --build
-$ docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
-$ docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+docker-compose -f docker-compose.prod.yml up -d --build
+docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
+docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
 # Bring down the development containers (and the associated volumes with the -v flag)
-$ docker-compose -f docker-compose.prod.yml down -v
-$ docker-compose -f docker-compose.prod.yml logs -f # 查看日志
+docker-compose -f docker-compose.prod.yml down -v
+docker-compose -f docker-compose.prod.yml logs -f # 查看日志
 ```
 
+顺带一提 flake部分是检查代码的，不过基本都是些空格啥的问题
 
 ### FAQ
 
@@ -67,3 +68,7 @@ docker-compose exec web python manage.py startapp upload
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 (env) python manage.py startapp upload
 ```
+
+### 参考
+
+[bootstrap博客模板](https://djangocentral.com/building-a-blog-application-with-django/)
