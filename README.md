@@ -49,6 +49,8 @@ docker volume inspect django-docker_postgres_data
 docker-compose -f docker-compose.prod.yml up -d --build
 docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
 docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+docker-compose -f docker-compose.prod.yml exec db psql --username=postgres
 # Bring down the development containers (and the associated volumes with the -v flag)
 docker-compose -f docker-compose.prod.yml down -v
 docker-compose -f docker-compose.prod.yml logs -f # 查看日志

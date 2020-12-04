@@ -1,11 +1,13 @@
-version: '3.8'
-
+version: '3.3'
+# 18.04 1.17 3.3
+# 20.04 19.03 3.8
 services: 
   web:
     build: 
       context: ./app
       dockerfile: Dockerfile.prod
     command: gunicorn django_tiger.wsgi:application --bind 0.0.0.0:8000
+    # command: gunicorn django_tiger.wsgi:application
     volumes: 
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
@@ -32,12 +34,16 @@ services:
       redis-server --appendonly yes
 
   nginx:
-    build: ./nginx
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+      # 参考nginx文件夹里配置的注释来使用
     volumes: 
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     ports: 
-      - 1337:80
+      - 80:80
+      - 443:443
     depends_on: 
       - web
 
