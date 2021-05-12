@@ -26,6 +26,13 @@ services:
     env_file: 
       - ./.env.prod.db
 
+  bot:
+    build: 
+      context: ./bot
+    command: python cron.py
+    volumes:
+      - bot_volume:/home/app/web/botfiles
+
   redis:
     image: redis:alpine
     volumes: 
@@ -41,9 +48,12 @@ services:
     volumes: 
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
+      - bot_volume:/home/app/web/botfiles
     ports: 
       - 80:80
       - 443:443
+    environment:
+      TZ : 'Asia/Shanghai'
     depends_on: 
       - web
 
@@ -53,3 +63,4 @@ volumes:
   redis_data:
   static_volume:
   media_volume:
+  bot_volume:

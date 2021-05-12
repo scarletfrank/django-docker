@@ -3,6 +3,14 @@
 > 参考了[这个博客](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
 
 
+## 0512 
+
+### 生成密钥
+
+```bash
+python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
+
 ## 待合并项目
 
 我的[网站](https://www.frankscarlet.pro/)

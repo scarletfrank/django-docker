@@ -76,7 +76,7 @@ def ffmpegjob():
 # scheduler = BackgroundScheduler()
 scheduler = BlockingScheduler()
 scheduler.add_job(job, 'cron', minute='*/20')
-scheduler.add_job(daily, 'cron', hour='*/6')
+# scheduler.add_job(daily, 'cron', hour='*/6')
 scheduler.add_job(backup, 'cron', day_of_week='5', hour=9, minute=29)
 scheduler.add_job(botjob, 'cron', day_of_week='6', hour=18, minute=29)
 
