@@ -1,8 +1,5 @@
 # README
 
-> 参考了[这个博客](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
-
-
 ## 0512 
 
 ### 生成密钥
@@ -11,31 +8,48 @@
 python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
 ```
 
-## 待合并项目
+### 拷贝Volume
 
-我的[网站](https://www.frankscarlet.pro/)
+> 从Schedule_bot的Volume拷贝到本地，再从本地拷到Container里
 
-[现有App](https://github.com/FrankScarlet/Django_Apps)
+```bash
+docker cp [src] [des]
+docker cp mediafiles/ djangodocker_bot_1:/home/app/web/botfiles/
+# 我写错了，拷到web里了，结果权限就乱了....现在那个拷贝的就没法删除掉了（因为已经切换到appuser用户了）
+```
 
-
-## 改进
-
-- 增加了国内源配置
 
 ## 待完成内容
 
-- 静态主页plate应用
-- 增加redis部分
-- 增加blog部分
+- [ ] 增加redis部分
+
+## 参考
+
+- [bootstrap博客模板](https://djangocentral.com/building-a-blog-application-with-django/)
+
+- 我的[网站](https://www.frankscarlet.pro/)
+
+- [原有App](https://github.com/FrankScarlet/Django_Apps)
+
+-  Docker方式部署参考了[这个博客](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
+
 
 ## Cheatsheet
 
-### 开发环境下的相关命令
+> 启动与停止，可用VS Code（包括查看容器内内容，容器内执行命令）
+
+### pre
+
+```bash
+# 一会儿再补
+```
+
+
+### dev
 
 ```shell
 docker-compose up -d --build
 docker-compose down
-# Bring down the development containers (and the associated volumes with the -v flag)
 # 可选命令
 # entrypoint.sh里其实应该有migrate了
 docker-compose exec web python manage.py migrate --noinput 
@@ -49,9 +63,7 @@ docker-compose exec web python manage.py collectstatic --no-input --clear
 docker volume inspect django-docker_postgres_data
 ```
 
-### 生产环境
-
-带了static和media
+### prod
 
 ```shell
 docker-compose -f docker-compose.prod.yml up -d --build
@@ -60,11 +72,11 @@ docker-compose -f docker-compose.prod.yml exec web python manage.py collectstati
 docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
 docker-compose -f docker-compose.prod.yml exec db psql --username=postgres
 # Bring down the development containers (and the associated volumes with the -v flag)
-docker-compose -f docker-compose.prod.yml down -v
-docker-compose -f docker-compose.prod.yml logs -f # 查看日志
+docker-compose -f docker-compose.prod.yml down
+# -v 会把volume去掉的，，，
 ```
 
-顺带一提 flake部分是检查代码的，不过基本都是些空格啥的问题
+
 
 ### FAQ
 
@@ -79,6 +91,3 @@ docker-compose exec web python manage.py startapp upload
 (env) python manage.py startapp upload
 ```
 
-### 参考
-
-[bootstrap博客模板](https://djangocentral.com/building-a-blog-application-with-django/)
