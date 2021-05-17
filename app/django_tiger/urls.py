@@ -25,6 +25,7 @@ urlpatterns = [
     path('upload/', include('upload.urls')),
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
+    path(r'mdeditor/', include('mdeditor.urls'))
 ]
 
 if bool(settings.DEBUG):

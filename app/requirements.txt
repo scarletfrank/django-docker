@@ -6,3 +6,5 @@ Django
 gunicorn
 psycopg2-binary
 django-redis
+django-mdeditor
+markdown 

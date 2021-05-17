@@ -42,6 +42,12 @@ docker cp mediafiles/ djangodocker_bot_1:/home/app/web/botfiles/
 
 ```bash
 # 一会儿再补
+docker-compose -f docker-compose.pre.yml up -d --build
+# 因为变动了数据库
+docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
+docker-compose -f docker-compose.prod.yml exec web python manage.py makemigrations
+# 由于引入了mdeditor，需要重新收集静态资源
+docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
 ```
 
 
@@ -78,16 +84,19 @@ docker-compose -f docker-compose.prod.yml down
 
 
 
-### FAQ
+## FAQ
+
+如何新建应用
 
 ```shell
-docker-compose up -d --build
+
 docker-compose exec web python manage.py startapp upload
 # 这一步为啥会在本地app文件夹里新建一个app啊
 # 而且是root权限的...这不合适吧，VS Code都没法编辑了
 
+# 推荐使用虚拟环境来新建，当然不用应该也行
+(env) python manage.py startapp upload
 # setting.py 临时注释掉用于生成新app
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-(env) python manage.py startapp upload
 ```
 
