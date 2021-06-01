@@ -9,7 +9,7 @@ import signal
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
-x = 526
+x = 531
 
 # 输出时间
 
@@ -40,9 +40,9 @@ def botjob():
     try:
         logging.info("执行minyami[bot]")
         out, errs = p1.communicate(timeout=1860)
-        x += 1
     except sub.TimeoutExpired as e:
         logging.warning("[bot] 录制时间已到，Ctrl+C 终止录制程序")
+        x += 1
         p1.send_signal(signal.SIGINT)
 
 

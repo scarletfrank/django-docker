@@ -22,7 +22,7 @@ RUN apk update \
 
 # lint
 # ...还是需要先设置pip 源
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install --upgrade pip 
 RUN pip install flake8
 COPY . .
@@ -65,7 +65,7 @@ COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 
 # lint
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install --no-cache /wheels/*
 
 # copy entrypoint-prod.sh
