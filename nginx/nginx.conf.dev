@@ -25,10 +25,24 @@ server{
     }
 
     location /bot/ {
-        # download
+        
+        alias /home/app/web/botfiles/;
+        # naive
         autoindex on;               # enable directory listing output
         autoindex_exact_size off;   # output file sizes rounded to kilobytes, megabytes, and gigabytes
         autoindex_localtime on;     # output local times in the directory
-        alias /home/app/web/botfiles/;
+        # fancyindex on;              # Enable fancy indexes.
+        # fancyindex_exact_size off;  # Output human-readable file sizes.
+        # fancyindex_name_length 255; # Maximum file name length in bytes, change as you like.
+        # theme
+        # fancyindex_header "/fancyindex/header.html";
+        # fancyindex_footer "/fancyindex/footer.html";
     }
+
+    #location @autoindex {
+    #    autoindex on;
+    #    autoindex_format xml;
+    #    xslt_string_param path $uri;
+    #    xslt_stylesheet /etc/nginx/conf.d/nginx_template.xslt ;
+    #}
 }
