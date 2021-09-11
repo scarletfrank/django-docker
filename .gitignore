@@ -1,9 +1,4 @@
-.env.prod.db
-.env.prod
-.env.dev
-.env.dev.db
-.env.pre
-.env.pre.db
+.env.*
 
 env/
 app/django_tiger/__pycache__/

@@ -9,8 +9,10 @@ import signal
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
-x = 531
-
+fs = os.getenv('FS')
+x = int(fs)
+logging.info('环境变量fs: ' + fs)
+logging.info(f'x={x}')
 # 输出时间
 
 

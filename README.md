@@ -1,6 +1,6 @@
 # README
 
-## 0512 
+## 常用运维
 
 ### 生成密钥
 
@@ -8,7 +8,7 @@
 python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
 ```
 
-### 拷贝Volume
+### Volume拷贝
 
 > 从Schedule_bot的Volume拷贝到本地，再从本地拷到Container里
 
@@ -16,23 +16,43 @@ python3 -c 'from django.core.management.utils import get_random_secret_key; prin
 docker cp [src] [des]
 docker cp mediafiles/ djangodocker_bot_1:/home/app/web/botfiles/
 # 我写错了，拷到web里了，结果权限就乱了....现在那个拷贝的就没法删除掉了（因为已经切换到appuser用户了）
+docker cp djangodocker_bot_1:/home/app/web/botfiles ~/botbackup/
 ```
 
+### 数据库备份
 
-## 待完成内容
+```bash
+# from: 
+docker exec -t djangodocker_db_1 pg_dumpall -c -U postgres > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+# to: 
+cat dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql | docker exec -i django-docker_db_1 psql -U postgres < 
+```
+
+### 新建应用
+
+```shell
+docker-compose exec web python manage.py startapp upload
+# 这一步为啥会在本地app文件夹里新建一个app啊
+# 而且是root权限的...这不合适吧，VS Code都没法编辑了
+# 推荐使用虚拟环境来新建，当然不用应该也行
+(env) python manage.py startapp upload
+# setting.py 临时注释掉用于生成新app
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+```
+
+## Todo
 
 - [ ] 增加redis部分
 
-## 参考
+## 参考资料
 
-- [bootstrap博客模板](https://djangocentral.com/building-a-blog-application-with-django/)
+1. [bootstrap博客模板](https://djangocentral.com/building-a-blog-application-with-django/)
 
-- 我的[网站](https://www.frankscarlet.pro/)
+2. [原有App](https://github.com/FrankScarlet/Django_Apps)
 
-- [原有App](https://github.com/FrankScarlet/Django_Apps)
+3. Docker部署参考[这个博客](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
 
--  Docker方式部署参考了[这个博客](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
-
+4. [postgres-backup](https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database)
 
 ## Cheatsheet
 
@@ -81,22 +101,3 @@ docker-compose -f docker-compose.prod.yml exec db psql --username=postgres
 docker-compose -f docker-compose.prod.yml down
 # -v 会把volume去掉的，，，
 ```
-
-
-
-## FAQ
-
-如何新建应用
-
-```shell
-
-docker-compose exec web python manage.py startapp upload
-# 这一步为啥会在本地app文件夹里新建一个app啊
-# 而且是root权限的...这不合适吧，VS Code都没法编辑了
-
-# 推荐使用虚拟环境来新建，当然不用应该也行
-(env) python manage.py startapp upload
-# setting.py 临时注释掉用于生成新app
-# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-```
-

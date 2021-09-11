@@ -30,6 +30,8 @@ services:
     build: 
       context: ./bot
     command: python cron.py
+    env_file: 
+      - ./.env.bot
     volumes:
       - bot_volume:/home/app/web/botfiles
 
@@ -54,8 +56,6 @@ services:
       - 443:443
     environment:
       TZ : 'Asia/Shanghai'
-    depends_on: 
-      - web
 
 
 volumes: 

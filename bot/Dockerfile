@@ -39,7 +39,7 @@ RUN date
 
 RUN apk add --update nodejs npm
 
-RUN npm config set registry https://registry.npm.taobao.org --global
+# RUN npm config set registry https://registry.npm.taobao.org --global
 
 RUN npm install minyami -g
 
