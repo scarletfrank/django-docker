@@ -17,7 +17,7 @@ services:
       - ./.env.pre
     depends_on: 
       - db
-      - redis
+      # - redis
 
   db:
     image: postgres:13-alpine
@@ -44,7 +44,7 @@ services:
   nginx:
     build: 
       context: ./nginx
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.fancy
       # 参考nginx文件夹里配置的注释来使用
     volumes: 
       - static_volume:/home/app/web/staticfiles
