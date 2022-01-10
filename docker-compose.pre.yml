@@ -33,13 +33,26 @@ services:
     volumes:
       - bot_volume:/home/app/web/botfiles
 
+  xxl-admin:
+    image: xuxueli/xxl-job-admin:2.3.0
+    volumes:
+      - xxl_admin_log:/data/applogs
+    environment:
+      PARAMS: "--spring.datasource.url=jdbc:mysql://xxl-db:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai --spring.datasource.username=xxl --spring.datasource.password=xxladmin --spring.datasource.driver-class-name=com.mysql.jdbc.Driver"
+    ports:
+      - 9080:8080
+    depends_on:
+      - xxl-db
 
-  redis:
-    image: redis:alpine
-    volumes: 
-      - redis_data:/data
-    command: 
-      redis-server --appendonly yes
+  xxl-db:
+    image: mysql:8
+    volumes:
+      - xxl_db:/var/lib/mysql
+    restart: always
+    env_file:
+      - ./.admin.env
+    expose:
+      - 3306
 
   nginx:
     build: 
@@ -58,10 +71,19 @@ services:
     depends_on: 
       - web
 
+  redis:
+    image: redis:alpine
+    volumes: 
+      - redis_data:/data
+    command: 
+      redis-server --appendonly yes
+
 
 volumes: 
   postgres_data:
-  redis_data:
   static_volume:
   media_volume:
   bot_volume:
+  redis_data:
+  xxl_admin_log:
+  xxl_db:
