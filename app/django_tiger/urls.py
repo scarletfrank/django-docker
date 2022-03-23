@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from feed.FeedCollections import RecentEntriesFeed, LatestEntriesFeed, HiyamiEntriesFeed, FreeStyleEntriesFeed, MemEntriesFeed
+from feed.FeedCollections import LatestEntriesFeed, HiyamiEntriesFeed, FreeStyleEntriesFeed, MemEntriesFeed
 
 urlpatterns = [
     path('', include('plate.urls')),
@@ -27,7 +27,6 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('rss/blog/', LatestEntriesFeed()),
-    path('rss/blog/recent/', RecentEntriesFeed()),
     path('rss/hiyami/', HiyamiEntriesFeed()),
     path('rss/hiyami/frst/', FreeStyleEntriesFeed()),
     path('rss/hiyami/mem_dis', MemEntriesFeed()),
