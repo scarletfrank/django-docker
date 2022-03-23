@@ -16,7 +16,7 @@ class LatestEntriesFeed(Feed):
 
     def item_description(self, item):
         # return item.excerpt
-        return item.body
+        return item.body_html
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
@@ -36,7 +36,7 @@ class RecentEntriesFeed(Feed):
 
     def item_description(self, item):
         # return item.excerpt
-        return item.body
+        return item.body_html
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
@@ -56,7 +56,7 @@ class FreeStyleEntriesFeed(Feed):
 
     def item_description(self, item):
         # return item.excerpt
-        return item.body
+        return item.body_html
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
@@ -76,7 +76,7 @@ class HiyamiEntriesFeed(Feed):
 
     def item_description(self, item):
         # return item.excerpt
-        return item.body
+        return item.body_html
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
@@ -96,7 +96,7 @@ class MemEntriesFeed(Feed):
 
     def item_description(self, item):
         # return item.excerpt
-        return item.body
+        return item.body_html
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
