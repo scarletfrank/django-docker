@@ -155,3 +155,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 # SECURE_SSL_REDIRECT = True
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = ['https://www.frankscarlet.pro', 'https://frankscarlet.pro']
